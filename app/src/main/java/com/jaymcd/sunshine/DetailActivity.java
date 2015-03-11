@@ -19,7 +19,6 @@ import android.widget.TextView;
 public class DetailActivity extends ActionBarActivity {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,9 +79,9 @@ public class DetailActivity extends ActionBarActivity {
             ShareActionProvider mShareActionProvider =
                     (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
 
-            if(mShareActionProvider != null){
+            if (mShareActionProvider != null) {
                 mShareActionProvider.setShareIntent(createShareForecastIntent());
-            }else{
+            } else {
                 Log.d(LOG_TAG, "Share Action Provider is null?");
             }
 
@@ -93,7 +92,7 @@ public class DetailActivity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
             Intent intent = getActivity().getIntent();
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-            if (intent != null && intent.hasExtra(Intent.EXTRA_TEXT)){
+            if (intent != null && intent.hasExtra(Intent.EXTRA_TEXT)) {
                 mForecastStr = intent.getStringExtra(Intent.EXTRA_TEXT);
                 ((TextView) rootView.findViewById(R.id.detail_text)).setText(mForecastStr);
             }
@@ -102,7 +101,7 @@ public class DetailActivity extends ActionBarActivity {
             return rootView;
         }
 
-        private Intent createShareForecastIntent(){
+        private Intent createShareForecastIntent() {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
             shareIntent.setType("text/plain");

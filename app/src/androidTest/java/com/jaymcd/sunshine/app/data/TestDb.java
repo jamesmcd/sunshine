@@ -73,7 +73,7 @@ public class TestDb extends AndroidTestCase {
         // verify that the tables have been created
         do {
             tableNameHashSet.remove(c.getString(0));
-        } while( c.moveToNext() );
+        } while (c.moveToNext());
 
         // if this fails, it means that your database doesn't contain both the location entry
         // and weather entry tables
@@ -99,7 +99,7 @@ public class TestDb extends AndroidTestCase {
         do {
             String columnName = c.getString(columnNameIndex);
             locationColumnHashSet.remove(columnName);
-        } while(c.moveToNext());
+        } while (c.moveToNext());
 
         // if this fails, it means that your database doesn't contain all of the required location
         // entry columns
@@ -128,15 +128,15 @@ public class TestDb extends AndroidTestCase {
         long locationRowId;
 
         // Insert ContentValues into database and get a row ID back
-        locationRowId = db.insert(WeatherContract.LocationEntry.TABLE_NAME,null,testValues);
+        locationRowId = db.insert(WeatherContract.LocationEntry.TABLE_NAME, null, testValues);
         assertTrue(locationRowId != -1);
         // Query the database and receive a Cursor back
         Cursor cursor = db.query(WeatherContract.LocationEntry.TABLE_NAME, null, null, null, null, null, null);
         // Move the cursor to a valid database row
-        assertTrue("Error: No Records Returned from Location Query",cursor.moveToFirst());
-        TestUtilities.validateCurrentRecord("Error: Location Query Validation Failed",cursor,testValues);
+        assertTrue("Error: No Records Returned from Location Query", cursor.moveToFirst());
+        TestUtilities.validateCurrentRecord("Error: Location Query Validation Failed", cursor, testValues);
 
-        assertFalse("Error: More than one record returned from location query",cursor.moveToNext());
+        assertFalse("Error: More than one record returned from location query", cursor.moveToNext());
         // Validate data in resulting Cursor with the original ContentValues
         // (you can use the validateCurrentRecord function in TestUtilities to validate the
         // query if you like)
@@ -190,9 +190,9 @@ public class TestDb extends AndroidTestCase {
         );
 
         // Move the cursor to a valid database row
-        assertTrue("Error: No Records Returned from Weather Query",weatherCursor.moveToFirst());
-        TestUtilities.validateCurrentRecord("Error: Weather Query Validation Failed",weatherCursor,weatherValues);
-        assertFalse("Error: More than one record returned from weather query",weatherCursor.moveToNext());
+        assertTrue("Error: No Records Returned from Weather Query", weatherCursor.moveToFirst());
+        TestUtilities.validateCurrentRecord("Error: Weather Query Validation Failed", weatherCursor, weatherValues);
+        assertFalse("Error: More than one record returned from weather query", weatherCursor.moveToNext());
         // Validate data in resulting Cursor with the original ContentValues
         // (you can use the validateCurrentRecord function in TestUtilities to validate the
         // query if you like)
