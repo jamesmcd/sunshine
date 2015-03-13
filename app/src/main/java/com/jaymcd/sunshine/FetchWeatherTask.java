@@ -18,15 +18,11 @@ package com.jaymcd.sunshine;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.text.format.Time;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import com.jaymcd.sunshine.data.WeatherContract;
 import com.jaymcd.sunshine.data.WeatherContract.WeatherEntry;
@@ -41,17 +37,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Vector;
 
-public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
+public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
     private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
-    private ArrayAdapter<String> mForecastAdapter;
     private final Context mContext;
-
 
     public FetchWeatherTask(Context context) {
         mContext = context;
@@ -68,7 +60,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
      * @param lon the longitude of the city
      * @return the row ID of the added location.
      */
-    long addLocation(String locationSetting, String cityName, double lat, double lon) {
+    public long addLocation(String locationSetting, String cityName, double lat, double lon) {
         long locationId;
 
         // First, check if the location with this city name exists in the db
@@ -345,5 +337,4 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
         }
         return null;
     }
-
 }
